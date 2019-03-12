@@ -1,0 +1,44 @@
+
+/*postion*/
+
+.margin-left-50
+{
+    margin-left: 50px;
+}
+
+.margin-top-50
+{
+    margin-top: 50px;
+}
+
+
+
+
+/*size*/
+.height-30
+{
+    height:30px;;
+}
+
+.width-30
+{
+    width: 30px;
+}
+
+/*color*/
+.background-color-00ffbf
+{
+    background-color: #00ffbf;
+}
+
+/*border*/
+.border-bisque
+{
+    border:bisque;
+}
+
+
+.text-align
+{   
+    text-align: center;
+}
