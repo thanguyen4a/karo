@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="config"/>
+	<buildpathentry kind="src" path="dao"/>
+	<buildpathentry kind="src" path="exception"/>
+	<buildpathentry kind="src" path="flash"/>
+	<buildpathentry kind="src" path="layout"/>
+	<buildpathentry kind="src" path="mapping"/>
+	<buildpathentry kind="src" path="model"/>
+	<buildpathentry kind="src" path="page"/>
+	<buildpathentry kind="src" path="util"/>
+	<buildpathentry kind="src" path="validation"/>
+	<buildpathentry kind="src" path="web"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>

@@ -17,7 +17,7 @@
 /*size*/
 .height-30
 {
-    height:30px;;
+    height:30px;
 }
 
 .width-30
@@ -30,15 +30,26 @@
 {
     background-color: #00ffbf;
 }
+.text-shadow-red
+{
+    text-shadow: 2px 2px 5px #ff0000;
+}
 
-/*border*/
+
 .border-bisque
 {
     border:bisque;
 }
 
 
-.text-align
-{   
+.text-color-red-italic  * {
+    color: red;
+    /*font-style:italic;*/
+    font-size: larger;
+
+}
+
+
+.text-align-center{
     text-align: center;
 }
