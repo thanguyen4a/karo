@@ -80,14 +80,14 @@ function generateTable(tblB) {
             TD.setAttribute("id", i + "" + j);
             TD.setAttribute("class", "height-30 width-30 background-color-00ffbf border-bisque text-align-center");
             var text = document.createTextNode(PLAYER_TICK.NONE);
-            var span  = document.createElement("span");
+            var span = document.createElement("span");
             span.appendChild(text);
-            
+
             TD.appendChild(span);
             TR.appendChild(TD);
         }
     }
-    
+
 }
 
 
@@ -243,13 +243,13 @@ function determineCrossFirstWin(id_str, player)
         if (i - delta < 0 || i + (win_lenght - delta - 1) >= cell_number) {
             continue;
         }
-        
+
         if (j - delta < 0 || j + (win_lenght - delta - 1) >= cell_number) {
             continue;
         }
-        
-        
-        var sub_array = isWinSubCrossFirstArray(i,j,delta, player)
+
+
+        var sub_array = isWinSubCrossFirstArray(i, j, delta, player)
         if (sub_array != false) {
             return sub_array;
         }
@@ -258,13 +258,13 @@ function determineCrossFirstWin(id_str, player)
     return determineCrossSecondWin(id_str, player);
 }
 
-function isWinSubCrossFirstArray(i,j, start, player)
+function isWinSubCrossFirstArray(i, j, start, player)
 {
     var sub_array = new Array(win_lenght);
     for (var m = -start; m < -start + win_lenght; m++)
     {
-        sub_array[m + start] = this.arr[i+m][j+m];
-        if (this.arr[i+m][j+m]["player"] != player) {
+        sub_array[m + start] = this.arr[i + m][j + m];
+        if (this.arr[i + m][j + m]["player"] != player) {
             return false;
         }
     }
@@ -280,18 +280,26 @@ function determineCrossSecondWin(id_str, player)
     var j = parseInt(id_str.substring(1, 2));
 
     for (var delta = 0; delta < win_lenght; delta++) {
-//        console.log("j - delta" + (j - delta));
-//         console.log(" j + (win_lenght - delta - 1) " + ( j + (win_lenght - delta - 1) ));
-        if (i - delta < 0 || i + (win_lenght - delta - 1) >= cell_number) {
+
+        console.log("i =" + i);
+        console.log(" j =" + j);
+
+
+        console.log("i - delta =" + (i - delta));
+        console.log(" i + (win_lenght - delta - 1) =" + (i + (win_lenght - delta - 1)));
+
+        console.log("j - delta=" + (j - delta));
+        console.log(" j + (win_lenght - delta - 1)= " + (j + (win_lenght - delta - 1)));
+        if (i - delta >= cell_number || i - (win_lenght - delta - 1) < 0) {
             continue;
         }
-        
-        if (j - delta < 0 || j + (win_lenght - delta - 1) >= cell_number) {
+
+        if (j + delta > 0 || j + (win_lenght - delta - 1) >= cell_number) {
             continue;
         }
-        
-        
-        var sub_array = isWinSubCrossSecondArray(i,j,delta, player)
+
+
+        var sub_array = isWinSubCrossSecondArray(i, j, delta, player)
         if (sub_array != false) {
             return sub_array;
         }
@@ -300,13 +308,16 @@ function determineCrossSecondWin(id_str, player)
     return false;
 }
 
-function isWinSubCrossSecondArray(i,j, start, player)
+function isWinSubCrossSecondArray(i, j, start, player)
 {
     var sub_array = new Array(win_lenght);
     for (var m = -start; m < -start + win_lenght; m++)
     {
-        sub_array[m + start] = this.arr[i-m][j+m];
-        if (this.arr[i-m][j+m]["player"] != player) {
+
+        console.log("i-m" + (i - m));
+        console.log("j+m" + (j + m));
+        sub_array[m + start] = this.arr[i - m][j + m];
+        if (this.arr[i - m][j + m]["player"] != player) {
             return false;
         }
     }
@@ -341,7 +352,7 @@ function printID(sub_array) {
         }
     }
     console.log("id_list" + id_list);
-    console.log("class " +  $("#65").attr("class"));
+    console.log("class " + $("#65").attr("class"));
     fadeToogle(id_list);
 
 }
@@ -351,10 +362,10 @@ function fadeToogle(id_list)
 {
 //    var elements = $(id_list);
 //    setInterval(function () {
-            $(id_list).each(function () {
-                     console.log("id ... ddddddddddddddddddddd" +  $(this).attr("class"));
-                     $(this).addClass("text-color-red-italic"); 
-                 }) ;
+    $(id_list).each(function () {
+        console.log("id ... ddddddddddddddddddddd" + $(this).attr("class"));
+        $(this).addClass("text-color-red-italic");
+    });
 //                 }, 4000);
 
 //    });
