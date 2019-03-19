@@ -15,7 +15,7 @@ $(document).ready(function () {
         var user = $("#user").val();
         var age = $("#age").val();
         var sex = $('input[name="sex"]:checked');
-        var tell = $("#tell").val();
+        var tel = $("#tel").val();
         var mail = $("#mail").val();
         var birthday = $("#birthday").val();
         var avatar = $("#avatar").val();
@@ -26,6 +26,8 @@ $(document).ready(function () {
         errors += validateUser(user);
         errors += validateAge(age);
         errors += validateSex(sex);
+        errors += validateMail(mail);
+        errors += validateTel(tel);
         error.html(errors);
     }
     );
@@ -58,10 +60,26 @@ function validateAge(age) {
 
 function validateSex(sex) {   
     if(sex.length === 0)
-        return "Sex is invalid";
+        return "Sex is invalid \n";
+    return "";
+}
+
+function validateMail(mail) {   
+    var regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    var re = new RegExp(regexp);
+    if (!re.test(mail))
+        return "Mail is invalid \n"; 
     return "";
 }
 
 
-
+function validateTell(tel) {   
+    console.log("tel " + tel);
+    var regexp = "\\d{11}";
+    var re = new RegExp(regexp);
+    if (!re.test(tel))
+        return "Tel is invalid \n"; 
+    return "";
+}
 
