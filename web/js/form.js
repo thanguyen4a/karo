@@ -74,12 +74,36 @@ function validateMail(mail) {
 }
 
 
-function validateTell(tel) {   
+function validateTel(tel) {   
     console.log("tel " + tel);
-    var regexp = "\\d{11}";
+    var regexp = "^(?:\\d{11}|\\d{3}\-\\d{4}\-\\d{4}|\\d{3} \\d{4} \\d{4})$";
     var re = new RegExp(regexp);
     if (!re.test(tel))
         return "Tel is invalid \n"; 
     return "";
 }
 
+function validateDate(date) {   
+    console.log("tel " + date);
+    var regexp = "^(?:\\d{11}|\\d{3}\-\\d{4}\-\\d{4}|\\d{3} \\d{4} \\d{4})$";
+    var re = new RegExp(regexp);
+    if (!re.test(tel))
+        return "Tel is invalid \n"; 
+    return "";
+}
+
+
+function isYYYYMMDD(str){
+  //null or 8文字でない or 数値でない場合はfalse
+  if(str==null || str.length != 8 || isNaN(str)){
+    return false;
+  }
+ 
+  //年,月,日を取得する
+  var y = parseInt(str.substr(0,4));
+  var m = parseInt(str.substr(4,2)) ;
+  var d = parseInt(str.substr(6,2));
+  var dt = new Date(y, m, d);
+
+  return (y == dt.getFullYear() && m == dt.getMonth() && d == dt.getDate());
+}
