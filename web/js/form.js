@@ -11,57 +11,49 @@ var max_capital = 1000;  //byte
 
 
 $(document).ready(function () {
-
-    avatar = document.getElementById("avatar");
     var file;
-
-    avatar.addEventListener("change", function (evt) {
-        console.log("mmm");
-        file = evt.target.files;
-
-
-        if (file === null) {
-
-            console.log("avatar null");
-        } else {
-            console.log("khac null");
-        }
+    $(".avatar").each(function (i, elem) {
+        $(elem).on('change', function (evt) {
+            file = evt.target.files;
+            if (file === null) {
+                console.log("avatar null");
+            } else {
+                console.log("khac null");
+            }
+        });
     });
 
-    $("#submit").click(function () {
-        var user = $("#user").val();
-        var age = $("#age").val();
-        var sex = $('input[name="sex"]:checked');
-        var tel = $("#tel").val();
-        var mail = $("#mail").val();
-        var birthday = $("#birthday").val();
-
-        var error = $("#error");
 
 
-        var errors = "";
-        errors += validateUser(user);
-        errors += validateAge(age);
-        errors += validateSex(sex);
-        errors += validateMail(mail);
-        errors += validateTel(tel);
-        errors += validateDate(birthday);
-        errors += validateAvatar(file);
-        error.html(errors);
-    }
-    );
-
-
+    $(".button").each(function (i, elem) {
+        $(elem).click(function () {
+            var table = $(elem).closest('.table');
+            var user = table.find(".user:first").val();
+            var age = table.find(".age:first").val();
+            var sex = table.find('input[name="sex"]:checked');
+            var tel = table.find(".tel:first").val();
+            var mail = table.find(".mail:first").val();
+            var birthday = table.find(".birthday:first").val();
+            var error = table.find(".error:first");
+            var errors = "";
+            errors += validateUser(user);
+            errors += validateAge(age);
+            errors += validateSex(sex);
+            errors += validateMail(mail);
+            errors += validateTel(tel);
+            errors += validateDate(birthday);
+            errors += validateAvatar(file);
+            error.html(errors);
+        }
+        );
+    });
 });
-
-
 function validateUser(user) {
     var re = new RegExp("^[a-zA-Z0-9]+[a-zA-Z0-9]*$");
     if (!re.test(user))
         return "User name is invalid \n";
     if (user.length > max_lenght_user)
         return "User name must be less than or equal to" + max_lenght_user + "letters\n";
-
     return "";
 }
 
@@ -72,7 +64,6 @@ function validateAge(age) {
     var age_number = parseInt(age);
     if (age_number > max_lenght_age || age_number < 0)
         return "Age must be beetween from 0 to " + max_lenght_age + "\n";
-
     return "";
 }
 
@@ -106,9 +97,7 @@ function validateTel(tel) {
 //  YYYY/MM/DD
 function validateDate(date) {
     console.log("date " + date);
-
     var m1 = moment(date);
-
     if (m1.isValid()) {
         return "";
     } else {
@@ -134,7 +123,6 @@ function validateAvatar(file) {
     }
 
 
-    
-     return "";
 
+    return "";
 }

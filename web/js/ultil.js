@@ -44,7 +44,7 @@ $(document).ready(function () {
     body.appendChild(table);
 
     $("TD").click(function () {
-
+        
         var selector = $(this);
         var id_str = selector.attr("id");
         var span = selector.children('span');
