@@ -10,75 +10,81 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
-
+        <script type="text/javascript" src="../js/moment.js"></script>
         <script type="text/javascript" src="../js/form.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/form.css">
     </head>
     <body>
-        <div>TODO write content</div>
-
+        <div>Header</div>
         <header>
-            <h2>My Form</h2>
+            <h1>My Form</h1>
         </header>
 
-        <div>
-            <nav>
-                <ul>
-                    <li><a href="#">London</a></li>
-                    <li><a href="#">Paris</a></li>
-                    <li><a href="#">Tokyo</a></li>
-                </ul>
-            </nav>
+        <div id ="root">    
+            <div id ="nav">
+                <nav>
+                    <ul>
+                        <li><a href="#">London</a></li>
+                        <li><a href="#">Paris</a></li>
+                        <li><a href="#">Tokyo</a></li>
+                    </ul>
+                </nav>
+            </div> 
+
+
+            <div  id = "div-form">    
+                <form action="#" method="post" id="myform">
+                    <table border = 1>
+                        <tr>
+                            <th><label for="user">Name</label></th>
+                            <td><input type="text" id="user" name="user"></td>
+                        </tr>
+
+                        <tr>
+                            <th><label for="age">Age</label></th>
+                            <td><input type="text" id="age" name="age"></td>
+                        </tr>
+
+                        <tr>
+                            <th><label for="sex_1">Sex</label></th>
+                            <td><input type="radio" id="sex_1" name="sex" value="1">Male
+                                <input type="radio" id="sex_2" name="sex" value="2">Female
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th><label for="tel">Tel</label></th>
+                            <td><input type="text" id="tel" name="tel"></td>
+                        </tr>
+
+                        <tr>
+                            <th><label for="mail">メール</label></th>
+                            <td><input type="text" id="mail" name="mail"></td>
+                        </tr>
+
+                        <tr>
+                            <th><label for="birthday">Birthday</label></th>
+                            <td><input type="text" id="birthday" name="birthday"></td>
+                        </tr>
+
+                        <tr>
+                            <th><label for="avatar">Avatar</label></th>
+                            <td><input type="file" id="avatar"  name="avatar"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="error">Error</label></th>
+                            <td><textarea name="error" id ="error" rows="10" cols="40"></textarea></td>
+                        </tr>
+                    </table>
+                    <p><input type="button" value="送信" id="submit"></p>
+                </form>
+
+            </div>
+            <div id = "div-migi">
+                <h1>Migi</h1>
+            </div>
         </div> 
-
-
-        <div>    
-            <form action="#" method="post" id="myform">
-                <table border = 1>
-                    <tr>
-                        <th><label for="user">Name</label></th>
-                        <td><input type="text" id="user" name="user"></td>
-                    </tr>
-
-                    <tr>
-                        <th><label for="age">Age</label></th>
-                        <td><input type="text" id="age" name="age"></td>
-                    </tr>
-
-                    <tr>
-                        <th><label for="sex_1">SEx</label></th>
-                        <td><input type="radio" id="sex_1" name="sex" value="1">Male
-                            <input type="radio" id="sex_2" name="sex" value="2">Female
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th><label for="tel">Tel</label></th>
-                        <td><input type="text" id="tel" name="tel"></td>
-                    </tr>
-                    
-                    <tr>
-                        <th><label for="mail">メール</label></th>
-                        <td><input type="text" id="mail" name="mail"></td>
-                    </tr>
-                    
-                    <tr>
-                        <th><label for="birthday">Birthday</label></th>
-                        <td><input type="text" id="birthday" name="birthday"></td>
-                    </tr>
-                    
-                    <tr>
-                        <th><label for="avatar">Avatar</label></th>
-                        <td><input type="file" id="avatar"  name="avatar"></td>
-                    </tr>
-                     <tr>
-                        <th><label for="error">Error</label></th>
-                        <td><textarea name="error" id ="error" rows="10" cols="40"></textarea></td>
-                    </tr>
-                </table>
-                <p><input type="button" value="送信" id="submit"></p>
-            </form>
-
-        </div>     
+        <footer><h1>This is footer</h1></footer>
 
     </body>
 </html>
