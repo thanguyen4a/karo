@@ -121,8 +121,119 @@ function validateAvatar(file) {
     if (file[0].size >= max_capital) {
         return "Avatar capital must be less than or equal to " + max_capital + "byte";
     }
-
-
-
     return "";
+}
+
+
+function createNewForm(div_form, id)
+{
+    var div = document.createElement("DIV");
+    div.setAttribute("id", id + "");
+    form.setAttribute("action", "#");
+    div_form.appendChild(div);
+
+    var form = document.createElement("form");
+    form.setAttribute("action", "#");
+    form.setAttribute("method", "post");
+    form.setAttribute("class", "form");
+    div.appendChild(form);
+
+    var table = document.createElement("table");
+    table.setAttribute("class", "table");
+    table.setAttribute("boder", 1);
+    form.appendChild(table);
+
+
+    var label, input,input2,span,span2;
+
+    label = createLabel("user", "Name");
+    input = createInput("text", "user", "user", null);
+    create_TR_TD_TH(form, label, input, null,null,null);
+     
+    /////////////////////////
+    
+    label = createLabel("age", "Age");
+    input = createInput("text", "age", "age", null);   
+    create_TR_TD_TH(form, label, input,null,null,null);
+   
+    /////////////////////////
+    label = createLabel("sex_1", "Sex");
+    input = createInput("radio", "sex", "sex", "1");
+    input2 = createInput("radio", "sex", "sex", "2");
+    span = createSpan("Male");
+    span2 = createSpan("FeMale");
+    create_TR_TD_TH(form, label, input, input2,span,span2);
+    
+     /////////////////////////
+    label = createLabel("user", "Name");
+    input = createInput("text", "user", "user", null);
+    create_TR_TD_TH(form, label, input, null,null);
+    
+     /////////////////////////
+    label = createLabel("user", "Name");
+    input = createInput("text", "user", "user", null);
+    create_TR_TD_TH(form, label, input, null,null);
+    
+    
+
+
+}
+
+
+function create_TR_TD_TH(form, thLabel, tdInput1,tdInput2, tdSpan1,tdSpan2)
+{
+    var tr = document.createElement("tr");
+    var th = document.createElement("th");
+    var td = document.createElement("td");
+
+    if (thLabel !== null) {
+        th.appendChild(thLabel);
+    }
+    if (tdInput1 !== null) {
+        td.appendChild(tdInput1);
+    }
+    if (tdSpan1 !== null) {
+        td.appendChild(tdSpan1);
+    }
+    if (tdInput2 !== null) {
+        td.appendChild(tdInput2);
+    }
+    if (tdSpan2 !== null) {
+        td.appendChild(tdSpan2);
+    }
+
+    tr.appendChild(th);
+    tr.appendChild(td);
+    form.appendChild(tr);
+}
+
+
+function createLabel(_for, innerText)
+{
+    var label = document.createElement("label");
+    label.setAttribute("for", _for + "");
+    label.innerHTML = innerText;
+    return label;
+}
+
+function createInput(type, _class, name, value)
+{
+    var input = document.createElement("input");
+    input.setAttribute("type", type + "");
+    input.setAttribute("class", _class + "");
+    input.setAttribute("name", name + "");
+    if (value !== null) {
+        input.setAttribute("value", value + "");
+    }
+
+    return input;
+}
+
+
+function createSpan(innerText)
+{
+    var text = document.createTextNode(innerText);
+    var span = document.createElement("span");
+    span.appendChild(text);
+    return span;
 }
