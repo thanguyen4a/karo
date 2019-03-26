@@ -7,47 +7,165 @@
 var max_lenght_user = 10;
 var max_lenght_age = 100;
 var max_capital = 1000;  //byte
+var ID = 1;
 
-
-
+var file;
 $(document).ready(function () {
-    var file;
-    $(".avatar").each(function (i, elem) {
-        $(elem).on('change', function (evt) {
-            file = evt.target.files;
-            if (file === null) {
-                console.log("avatar null");
-            } else {
-                console.log("khac null");
-            }
-        });
+
+  
+
+    $('#Add').click(function () {
+        createNewForm("form" + ID);
+        var avatar = $("#form" + ID).find(".avatar:first");
+        changeAvatar(avatar);
+        var button = $("#form" + ID).find(".button:first");
+        console.log("button" + button.data());
+        clickButton(file, button);
+
+        ID++;
+    });
+
+    $('#Remove').click(function () {
+        deleteForm();
     });
 
 
-
-    $(".button").each(function (i, elem) {
-        $(elem).click(function () {
-            var table = $(elem).closest('.table');
-            var user = table.find(".user:first").val();
-            var age = table.find(".age:first").val();
-            var sex = table.find('input[name="sex"]:checked');
-            var tel = table.find(".tel:first").val();
-            var mail = table.find(".mail:first").val();
-            var birthday = table.find(".birthday:first").val();
-            var error = table.find(".error:first");
-            var errors = "";
-            errors += validateUser(user);
-            errors += validateAge(age);
-            errors += validateSex(sex);
-            errors += validateMail(mail);
-            errors += validateTel(tel);
-            errors += validateDate(birthday);
-            errors += validateAvatar(file);
-            error.html(errors);
-        }
-        );
-    });
 });
+
+
+
+
+function changeAvatar(avatar) {
+    avatar.on('change', function (evt) {
+        file = evt.target.files;
+        if (file === null) {
+            console.log("avatar null");
+        } else {
+            console.log("khac null");
+        }
+    });
+}
+
+
+function clickButton(file, button)
+{
+    button.click(function () {
+        var table = button.closest('.table');
+        var user = table.find(".user:first").val();
+        var age = table.find(".age:first").val();
+        var sex = table.find('input[name="sex"]:checked');
+        var tel = table.find(".tel:first").val();
+        var mail = table.find(".mail:first").val();
+        var birthday = table.find(".birthday:first").val();
+        var error = table.find(".error:first");
+        var errors = "";
+        errors += validateUser(user);
+        errors += validateAge(age);
+        errors += validateSex(sex);
+        errors += validateMail(mail);
+        errors += validateTel(tel);
+        errors += validateDate(birthday);
+        errors += validateAvatar(file);
+        error.html(errors);
+    }
+    );
+}
+
+function deleteForm() {
+    var delete_id = "form" + (this.ID -1);
+    var div_form = document.getElementById("div-form");
+    console.log("delete_id " +  delete_id);
+    var element = document.getElementById(delete_id);
+    if (element) {
+         console.log("avatar khac null");
+        div_form.removeChild(element);
+        this.ID--;
+    } else {
+        console.log("avatar null");
+    }
+}
+
+function createNewForm(id)
+{
+    var div_form = document.getElementById("div-form");
+    var change_form = document.getElementById("change-form");
+    var div = document.createElement("DIV");
+
+    div.setAttribute("id", id + "");
+//    div_form.appendChild(div);
+    div_form.insertBefore(div, change_form);
+
+    var form = document.createElement("form");
+    form.setAttribute("action", "#");
+    form.setAttribute("method", "post");
+    form.setAttribute("class", "form");
+    div.appendChild(form);
+
+    var table = document.createElement("table");
+    table.setAttribute("class", "table");
+    table.setAttribute("border", 1);
+    form.appendChild(table);
+
+
+    var label, input, input2, span, span2, textarea;
+
+    label = createLabel("user", "Name");
+    input = createInput("text", "user", "user", null);
+    create_TR_TD_TH(table, label, input, null, null, null, null);
+
+    /////////////////////////
+
+    label = createLabel("age", "Age");
+    input = createInput("text", "age", "age", null);
+    create_TR_TD_TH(table, label, input, null, null, null, null);
+
+    /////////////////////////
+    label = createLabel("sex_1", "Sex");
+    input = createInput("radio", "sex", "sex", "1");
+    input2 = createInput("radio", "sex", "sex", "2");
+    span = createSpan("Male");
+    span2 = createSpan("FeMale");
+    create_TR_TD_TH(table, label, input, input2, span, span2, null);
+
+    /////////////////////////
+
+    label = createLabel("tel", "Tel");
+    input = createInput("text", "tel", "tel", null);
+    create_TR_TD_TH(table, label, input, null, null, null, null);
+
+    /////////////////////////
+
+    label = createLabel("mail", "Mail");
+    input = createInput("text", "mail", "mail", null);
+    create_TR_TD_TH(table, label, input, null, null, null, null);
+
+    /////////////////////////
+
+    label = createLabel("birthday", "Birthday");
+    input = createInput("text", "birthday", "birthday", null);
+    create_TR_TD_TH(table, label, input, null, null, null, null);
+
+    /////////////////////////
+
+    label = createLabel("avatar", "Avatar");
+    input = createInput("file", "avatar", "avatar", null);
+    create_TR_TD_TH(table, label, input, null, null, null, null);
+
+    /////////////////////////
+
+    label = createLabel("error", "Error");
+    textarea = createTextArea("error", "error", 10, 40);
+    create_TR_TD_TH(table, label, null, null, null, null, textarea);
+
+    /////////////////////////
+
+    input = createInput("button", "button", "Submit", "Submit");
+    create_TR_TD_TH(table, null, input, null, null, null, null);
+
+    /////////////////////////
+    return div_form;
+}
+
 function validateUser(user) {
     var re = new RegExp("^[a-zA-Z0-9]+[a-zA-Z0-9]*$");
     if (!re.test(user))
@@ -58,7 +176,8 @@ function validateUser(user) {
 }
 
 function validateAge(age) {
-    var re = new RegExp("^[\d]+[\d]*$");
+    console.log("age" + age);
+    var re = new RegExp("^[0-9][0-9]*$");
     if (!re.test(age))
         return "Age is invalid \n";
     var age_number = parseInt(age);
@@ -125,62 +244,9 @@ function validateAvatar(file) {
 }
 
 
-function createNewForm(div_form, id)
-{
-    var div = document.createElement("DIV");
-    div.setAttribute("id", id + "");
-    form.setAttribute("action", "#");
-    div_form.appendChild(div);
-
-    var form = document.createElement("form");
-    form.setAttribute("action", "#");
-    form.setAttribute("method", "post");
-    form.setAttribute("class", "form");
-    div.appendChild(form);
-
-    var table = document.createElement("table");
-    table.setAttribute("class", "table");
-    table.setAttribute("boder", 1);
-    form.appendChild(table);
 
 
-    var label, input,input2,span,span2;
-
-    label = createLabel("user", "Name");
-    input = createInput("text", "user", "user", null);
-    create_TR_TD_TH(form, label, input, null,null,null);
-     
-    /////////////////////////
-    
-    label = createLabel("age", "Age");
-    input = createInput("text", "age", "age", null);   
-    create_TR_TD_TH(form, label, input,null,null,null);
-   
-    /////////////////////////
-    label = createLabel("sex_1", "Sex");
-    input = createInput("radio", "sex", "sex", "1");
-    input2 = createInput("radio", "sex", "sex", "2");
-    span = createSpan("Male");
-    span2 = createSpan("FeMale");
-    create_TR_TD_TH(form, label, input, input2,span,span2);
-    
-     /////////////////////////
-    label = createLabel("user", "Name");
-    input = createInput("text", "user", "user", null);
-    create_TR_TD_TH(form, label, input, null,null);
-    
-     /////////////////////////
-    label = createLabel("user", "Name");
-    input = createInput("text", "user", "user", null);
-    create_TR_TD_TH(form, label, input, null,null);
-    
-    
-
-
-}
-
-
-function create_TR_TD_TH(form, thLabel, tdInput1,tdInput2, tdSpan1,tdSpan2)
+function create_TR_TD_TH(table, thLabel, tdInput1, tdInput2, tdSpan1, tdSpan2, textArea)
 {
     var tr = document.createElement("tr");
     var th = document.createElement("th");
@@ -202,9 +268,13 @@ function create_TR_TD_TH(form, thLabel, tdInput1,tdInput2, tdSpan1,tdSpan2)
         td.appendChild(tdSpan2);
     }
 
+    if (textArea !== null) {
+        td.appendChild(textArea);
+    }
+
     tr.appendChild(th);
     tr.appendChild(td);
-    form.appendChild(tr);
+    table.appendChild(tr);
 }
 
 
@@ -236,4 +306,15 @@ function createSpan(innerText)
     var span = document.createElement("span");
     span.appendChild(text);
     return span;
+}
+
+
+function createTextArea(name, _class, rows, cols)
+{
+    var textArea = document.createElement("textarea");
+    textArea.setAttribute("name", name + "");
+    textArea.setAttribute("class", _class + "");
+    textArea.setAttribute("rows", rows + "");
+    textArea.setAttribute("cols", cols + "");
+    return textArea;
 }
