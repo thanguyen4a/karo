@@ -9,7 +9,6 @@ var number_of_project = 3;
 var number_of_process = 4;
 
 $(document).ready(function () {
-
     initTable();
 });
 
@@ -19,14 +18,31 @@ function initTable()
 {
     var table = document.getElementById("table");
 
-
+    createTitle(table);
     for (var i = 1; i <= number_of_project; i++) {
         createProject(table, "Project_" + i);
     }
 
 }
 
-function createTD(_class, text, rowspan, effort)
+function createTitle(table)
+{
+    var tr1 = document.createElement("tr");
+    var tr2 = document.createElement("tr");
+    var project_title = createTD("project-name", "Project Name", 2);
+    var process_title = createTD("process-name", "Process Name", 2);
+
+    tr1.appendChild(project_title);
+    tr1.appendChild(process_title);
+    tr1 = createDateTD(tr1, null);
+    tr2 = createDateTD(tr2, null);
+
+    table.appendChild(tr1);
+    table.appendChild(tr2);
+}
+
+
+function createTD(_class, text, rowspan)
 {
     var span = document.createElement("span");
     if (text)
@@ -36,10 +52,6 @@ function createTD(_class, text, rowspan, effort)
     td.setAttribute("class", _class);
     if (rowspan) {
         td.setAttribute("rowspan", rowspan);
-    }
-
-    if (effort) {
-        td.classList.add(effort);
     }
 
     td.appendChild(span);
@@ -78,35 +90,40 @@ function createProject(table, project_name)
     for (var i = 1; i <= this.number_of_process; i++) {
         var tr = document.createElement("tr");
         if (i === 1) {
-            var project_td = createTD("project-name", project_name, this.number_of_process, null);
+            var project_td = createTD("project-name", project_name, this.number_of_process);
             tr.appendChild(project_td);
         }
 
-        var process_td = createTD("process-name", "Process_" + i, null, null);
-
-        var monday = createTD("monday", null, null, "effort");
-        var tuesday = createTD("tuesday", null, null, "effort");
-        var wednesday = createTD("wednesday", null, null, "effort");
-        var thursday = createTD("thursday", null, null, "effort");
-        var friday = createTD("friday", null, null, "effort");
-        var saturday = createTD("saturday", null, null, "effort");
-        var sunday = createTD("sunday", null, null, "effort");
-        var sum = createTD("sum", null, null, "effort");
-
-
+        var process_td = createTD("process-name", "Process_" + i, null);
         tr.appendChild(process_td);
-        tr.appendChild(monday);
-        tr.appendChild(tuesday);
-        tr.appendChild(wednesday);
-        tr.appendChild(thursday);
-        tr.appendChild(friday);
-        tr.appendChild(saturday);
-        tr.appendChild(sunday);
-        tr.appendChild(sum);
+        tr = createDateTD(tr, null);
         table.appendChild(tr);
     }
 
 }
+
+
+function createDateTD(tr, date) {
+    var monday = createTD("monday effort", null, null);
+    var tuesday = createTD("tuesday effort", null, null);
+    var wednesday = createTD("wednesday effort", null, null);
+    var thursday = createTD("thursday effort", null, null);
+    var friday = createTD("friday effort", null, null);
+    var saturday = createTD("saturday effort", null, null);
+    var sunday = createTD("sunday effort", null, null);
+    var sum = createTD("sum effort", null, null);
+
+    tr.appendChild(monday);
+    tr.appendChild(tuesday);
+    tr.appendChild(wednesday);
+    tr.appendChild(thursday);
+    tr.appendChild(friday);
+    tr.appendChild(saturday);
+    tr.appendChild(sunday);
+    tr.appendChild(sum);
+    return tr;
+}
+
 
 function create_TR_TD_TH(table, thLabel, tdInput1, tdInput2, tdSpan1, tdSpan2, textArea)
 {
